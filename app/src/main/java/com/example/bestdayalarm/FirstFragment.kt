@@ -79,14 +79,18 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonFirst.setOnClickListener {
-            // Play a playlist
-            spotifyAppRemote!!.playerApi.play("spotify:playlist:37i9dQZF1DX2sUQwD7tbmL")
-            // Subscribe to PlayerState
-            spotifyAppRemote!!.playerApi.subscribeToPlayerState().setEventCallback {
-                val track: Track = it.track
-                Log.d("MainActivity", track.name + " by " + track.artist.name)
-            }
+            makeSomeMusic()
             //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
+    }
+
+    private fun makeSomeMusic(){
+        // Play a playlist
+        spotifyAppRemote!!.playerApi.play("spotify:track:3imxSzuOLfDyNhM2w4RKZm")
+        // Subscribe to PlayerState
+        spotifyAppRemote!!.playerApi.subscribeToPlayerState().setEventCallback {
+            val track: Track = it.track
+            Log.d("MainActivity", track.name + " by " + track.artist.name)
         }
     }
 
